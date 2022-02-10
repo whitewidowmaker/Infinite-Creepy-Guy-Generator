@@ -12,10 +12,12 @@ public class Explosion : MonoBehaviour
     public GameObject score = null;
     public GameObject shotsMissed = null;
     private GameObject enemyGen;
+    private GameObject clingSFX;
 
 
     private void Start()
     {
+        clingSFX = GameObject.Find("clingSFX");
         score = GameObject.Find("Score");
         shotsMissed = GameObject.Find("Score");
         enemyGen = GameObject.Find("EnemyGenerator");
@@ -25,6 +27,7 @@ public class Explosion : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
+            clingSFX.GetComponent<AudioSource>().Play();
             score.GetComponent<ScoreHolder>().score++;
             GameObject.FindWithTag("Enemy").GetComponent<Enemy>().Die();
         }
